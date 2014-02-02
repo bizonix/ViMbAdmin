@@ -113,6 +113,12 @@ class ViMbAdmin_Controller_Action extends Zend_Controller_Action
      */
     protected $_options = null;
 
+    /**
+     * A variable to hold the Zfdebug
+     *
+     * @var object An instance of the Zfdebug
+     */
+    protected $_zfdebug = null;
 
 
     /**
@@ -174,6 +180,9 @@ class ViMbAdmin_Controller_Action extends Zend_Controller_Action
         $this->_session  = $this->_bootstrap->getResource( 'namespace' );
         $this->_doctrine = $this->_bootstrap->getResource( 'doctrine' );
         $this->_auth     = $this->_bootstrap->getResource( 'auth' );
+        $this->_mailer   = $this->_bootstrap->getResource( 'mailer' );
+        $this->_zfdebug  = $this->_bootstrap->getResource( 'zfdebug' );
+
         $this->_identity = $this->_auth->getIdentity();
         $this->_admin    = $this->_identity['admin'];
 
