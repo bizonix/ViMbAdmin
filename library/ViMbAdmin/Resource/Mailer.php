@@ -66,7 +66,8 @@ class ViMbAdmin_Resource_Mailer extends Zend_Application_Resource_ResourceAbstra
             {
                 if( isset( $options['auth'] ) )
                 {
-                    $config = array( $options );
+                    $options['name']= $options['smtphost'];
+                    $config = $options;
                 }
                 else
                     $config = array();

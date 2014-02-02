@@ -351,7 +351,7 @@ class AdminController extends ViMbAdmin_Controller_Action
 
                         try
                         {
-                            $mailer->send();
+                            $mailer->send($this->_mailer);
                         }
                         catch( Zend_Mail_Exception $vException )
                         {
@@ -447,7 +447,7 @@ class AdminController extends ViMbAdmin_Controller_Action
 
                         $mailer->setBodyText( $this->view->render( 'admin/email/new_admin.phtml' ) );
 
-                        $mailer->send();
+                        $mailer->send($this->_mailer);
                     }
                     catch( Exception $e )
                     {

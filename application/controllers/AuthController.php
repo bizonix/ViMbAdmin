@@ -172,7 +172,7 @@ class AuthController extends ViMbAdmin_Controller_Action
 
                     $mailer->setBodyText( $this->view->render( 'auth/email/password_reset.phtml' ) );
 
-                    $mailer->send();
+                    $mailer->send($this->_mailer);
 
                     $this->addMessage( _( 'We have sent you an email with further details.' ), ViMbAdmin_Message::SUCCESS );
                     $this->_redirect( 'auth/login' );
@@ -212,7 +212,7 @@ class AuthController extends ViMbAdmin_Controller_Action
 
                 $mailer->setBodyText( $this->view->render( 'auth/email/new_password.phtml' ) );
 
-                $mailer->send();
+                $mailer->send($this->_mailer);
 
                 TokenTable::deleteTokens( $tokenModel->Admin, 'PASSWORD_RESET' );
 
@@ -336,7 +336,7 @@ class AuthController extends ViMbAdmin_Controller_Action
 
                         $mailer->setBodyText( $this->view->render( 'admin/email/new_admin.phtml' ) );
 
-                        $mailer->send();
+                        $mailer->send($this->_mailer);
                     }
                     catch( Exception $e )
                     {}

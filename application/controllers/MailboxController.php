@@ -427,7 +427,7 @@ class MailboxController extends ViMbAdmin_Controller_Action
                         );
 
                         // is the mailbox address valid?
-                        if( !Zend_Validate::is( "{$this->_mailbox['local_part']}@{$this->_mailbox['domain']}", 'EmailAddress', array( 1, null ) ) )
+                        if( !Zend_Validate::is( "{$this->_mailbox['local_part']}@{$this->_mailbox['domain']}", 'EmailAddress', array( 'allow' => (Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_LOCAL), 'mx' => null ) ) )
                         {
                             $editForm->getElement( 'local_part' )->addError( _( 'Invalid email address.' ) );
                             break;
@@ -605,7 +605,7 @@ class MailboxController extends ViMbAdmin_Controller_Action
 
         try
         {
-            $mailer->send();
+            $mailer->send($this->_mailer);
             return true;
         }
         catch( Exception $e )
@@ -657,7 +657,7 @@ class MailboxController extends ViMbAdmin_Controller_Action
 
                     try
                     {
-                        $mailer->send();
+                        $mailer->send($this->_mailer);
                     }
                     catch( Zend_Mail_Exception $vException )
                     {
